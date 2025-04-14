@@ -3,6 +3,22 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@layer utilities {
+  .animate-bounce-slow {
+    animation: bounceSlow 2s infinite;
+  }
+
+  @keyframes bounceSlow {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+}
+
+
 @theme {
   --font-inter: 'Inter', 'Roboto', sans-serif;
 
@@ -149,5 +165,8 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+button {
+  @apply hover:cursor-pointer;
 }
 
