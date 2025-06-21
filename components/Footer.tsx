@@ -1,17 +1,17 @@
-import React from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import Container from './Container'
-import { Github, Linkedin } from 'lucide-react'
-import logo from '../assets/successkeyagency-logo.png'
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import Container from './Container';
+import { Github, Linkedin } from 'lucide-react';
+import logo from '../assets/successkeyagency-logo.png';
 
 const Footer = () => {
   return (
     <footer className="bg-neutral-900 text-white py-10 mt-16">
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-sm text-center md:text-left space-y-8 md:space-y-0">
           <div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 justify-center md:justify-start">
               <Image
                 src={logo}
                 alt="SuccessKeyAgency Logo"
@@ -66,7 +66,7 @@ const Footer = () => {
               </a>
             </p>
 
-            <div className="flex items-center gap-4 mt-4">
+            <div className="flex items-center gap-4 mt-4 justify-center md:justify-start">
               <a
                 href="https://github.com/successkeyagency"
                 target="_blank"
@@ -91,11 +91,11 @@ const Footer = () => {
             <p className="text-gray-400 mb-4">
               Stay updated with our latest news and offers.
             </p>
-            <form className="flex flex-col sm:flex-row items-center gap-3">
+            <form className="flex flex-col sm:flex-row sm:justify-center items-center gap-3">
               <input
                 type="email"
                 placeholder="Your email"
-                className="w-full px-4 py-2 rounded-md bg-neutral-800 text-white placeholder-gray-500 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full sm:w-auto px-4 py-2 rounded-md bg-neutral-800 text-white placeholder-gray-500 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
               />
               <button
                 type="submit"
@@ -115,7 +115,7 @@ const Footer = () => {
         </div>
       </Container>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
