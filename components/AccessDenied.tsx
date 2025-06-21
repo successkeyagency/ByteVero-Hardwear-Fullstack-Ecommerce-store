@@ -1,10 +1,16 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card';
-import { SignInButton, SignUpButton } from '@clerk/nextjs';
-import { Button } from './ui/button';
-import Logo from './Logo';
+import React from "react";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
+import { SignInButton, SignUpButton } from "@clerk/nextjs";
+import { Button } from "./ui/button";
+import Logo from "./Logo";
 
 const AccessDenied = ({
   details = "Log in to view your cart items and checkout. Don't miss out on your favorite products!",
@@ -32,9 +38,12 @@ const AccessDenied = ({
         </CardContent>
 
         <CardFooter className="flex flex-col items-center gap-3">
-          <p className="text-sm text-white/70">Don't have an account?</p>
+          <p className="text-sm text-white/70">Don&apos;t have an account?</p>
           <SignUpButton mode="modal">
-            <Button variant="outline" className="w-full border-white/20 text-black hover:border-orange-500">
+            <Button
+              variant="outline"
+              className="w-full border-white/20 text-black hover:border-orange-500"
+            >
               Create an Account
             </Button>
           </SignUpButton>

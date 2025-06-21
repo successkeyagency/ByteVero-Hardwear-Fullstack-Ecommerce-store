@@ -3,7 +3,6 @@ import ProductCD from "@/components/ProductCD";
 import Title from "@/components/Title";
 import { getDealProducts } from "@/sanity/queries";
 import React from "react";
-import { Product } from '@/sanity.types';
 
 
 const SalesPage = async () => {
