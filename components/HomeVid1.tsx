@@ -1,15 +1,16 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState, useRef } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState, useRef } from "react";
+import { motion } from "framer-motion";
 
 const desktopVideos = [
-  'https://videos.pexels.com/video-files/15996602/15996602-uhd_2560_1440_30fps.mp4',
-  'https://videos.pexels.com/video-files/6789578/6789578-uhd_2560_1440_25fps.mp4',
-  'https://videos.pexels.com/video-files/4480445/4480445-hd_1920_1080_30fps.mp4',
+  "https://videos.pexels.com/video-files/15996602/15996602-uhd_2560_1440_30fps.mp4",
+  "https://videos.pexels.com/video-files/6789578/6789578-uhd_2560_1440_25fps.mp4",
+  "https://videos.pexels.com/video-files/4480445/4480445-hd_1920_1080_30fps.mp4",
 ];
 
-const mobileImage = 'https://images.pexels.com/photos/8817849/pexels-photo-8817849.jpeg'; 
+const mobileImage =
+  "https://images.pexels.com/photos/8817849/pexels-photo-8817849.jpeg";
 
 const HomeVid1 = () => {
   const [index, setIndex] = useState(0);
@@ -26,12 +27,14 @@ const HomeVid1 = () => {
     if (videoRef.current) {
       videoRef.current.src = desktopVideos[index];
       videoRef.current.load();
-      videoRef.current.play().catch((err) => console.warn('Autoplay error:', err));
+      videoRef.current
+        .play()
+        .catch((err) => console.warn("Autoplay error:", err));
     }
   }, [index]);
 
   return (
-    <div className="relative w-full h-[475px] md:h-[700px] overflow-hidden">
+    <div className="relative w-full h-[300px] sm:h-[400px] md:h-[700px] overflow-hidden">
       <video
         ref={videoRef}
         className="hidden md:block w-full h-full object-cover"
@@ -66,7 +69,8 @@ const HomeVid1 = () => {
           transition={{ delay: 0.6, duration: 0.7 }}
           className="text-white text-base sm:text-lg md:text-2xl mb-6 max-w-xl"
         >
-          Discover top-rated tools and gear trusted by builders, makers, and pros worldwide.
+          Discover top-rated tools and gear trusted by builders, makers, and
+          pros worldwide.
         </motion.p>
 
         <motion.a
