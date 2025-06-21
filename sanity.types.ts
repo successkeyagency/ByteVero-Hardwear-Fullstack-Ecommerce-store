@@ -202,6 +202,15 @@ export type Author = {
     _key: string;
   }>;
 };
+export interface OrderProduct {
+  product: {
+    _id: string;
+    name: string;
+    price?: number;
+    images?: { _type: string; asset: { _ref: string } }[];
+  } | null;
+  quantity: number;
+}
 
 export type Order = {
   _id: string;
@@ -244,6 +253,8 @@ export type Order = {
   status?: "pending" | "processing" | "paid" | "shipped" | "out_for_delivery" | "delivered" | "cancelled";
   orderDate?: string;
 };
+export type MY_ORDERS_QUERYResult = Order[];
+
 
 export type Product = {
   _id: string;

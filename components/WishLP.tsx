@@ -35,59 +35,73 @@ const WishLP = () => {
       {favoriteProduct?.length > 0 ? (
         <>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {favoriteProduct.slice(0, visibleProducts).map((product: Product) => (
-              <div
-                key={product._id}
-                className="border rounded-2xl shadow-sm overflow-hidden bg-white relative flex flex-col"
-              >
-                <button
-                  onClick={() => {
-                    removeFromFavorite(product._id);
-                    toast.success("Removed from wishlist");
-                  }}
-                  className="absolute top-2 right-2 bg-red-100 p-1 rounded-full hover:bg-red-200 transition"
+            {favoriteProduct
+              .slice(0, visibleProducts)
+              .map((product: Product) => (
+                <div
+                  key={product._id}
+                  className="border rounded-2xl shadow-sm overflow-hidden bg-white relative flex flex-col"
                 >
-                  <X size={18} className="text-red-500" />
-                </button>
-
-                <Link href={`/product/${product?.slug?.current}`}>
-                  <Image
-                    src={urlFor(product?.images?.[0]).url()}
-                    alt={product.name}
-                    width={400}
-                    height={400}
-                    className="w-full h-48 object-cover"
-                  />
-                </Link>
-
-                <div className="p-4 flex flex-col gap-2">
-                  <h2 className="text-lg font-semibold line-clamp-1">{product.name}</h2>
-
-                  {product?.categories?.length > 0 && (
-                    <p className="text-xs text-gray-500">
-                      {product.categories.join(", ")}
-                    </p>
-                  )}
-
-                  <p className="text-sm text-gray-600">Variant: {product.variant}</p>
-
-                  <p
-                    className={`text-sm font-medium ${
-                      product.stock > 0 ? "text-green-600" : "text-red-500"
-                    }`}
+                  <button
+                    onClick={() => {
+                      removeFromFavorite(product._id);
+                      toast.success("Removed from wishlist");
+                    }}
+                    className="absolute top-2 right-2 bg-red-100 p-1 rounded-full hover:bg-red-200 transition"
                   >
-                    {product.stock > 0 ? "In Stock" : "Out of Stock"}
-                  </p>
+                    <X size={18} className="text-red-500" />
+                  </button>
 
-                  <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                    <div className="text-base font-semibold">
-                      <PriceFormat amount={product.price} />
+                  <Link href={`/product/${product?.slug?.current}`}>
+                    <Image
+                      src={
+                        product?.images?.[0]
+                          ? urlFor(product.images[0]).url()
+                          : "/placeholder.png"
+                      }
+                      alt={"product image"}
+                      width={400}
+                      height={400}
+                    />
+                  </Link>
+
+                  <div className="p-4 flex flex-col gap-2">
+                    <h2 className="text-lg font-semibold line-clamp-1">
+                      {product.name}
+                    </h2>
+
+                    {product?.categories && product.categories.length > 0 && (
+                      <p className="text-xs text-gray-500">
+                        {product.categories.join(", ")}
+                      </p>
+                    )}
+
+                    <p className="text-sm text-gray-600">
+                      Variant: {product.variant}
+                    </p>
+
+                    <p
+                      className={`text-sm font-medium ${
+                        (product.stock ?? 0) > 0
+                          ? "text-green-600"
+                          : "text-red-500"
+                      }`}
+                    >
+                      {(product.stock ?? 0) > 0 ? "In Stock" : "Out of Stock"}
+                    </p>
+
+                    <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                      <div className="text-base font-semibold">
+                        <PriceFormat amount={product.price} />
+                      </div>
+                      <AddToCartB
+                        product={product}
+                        className="w-full sm:w-auto text-sm"
+                      />
                     </div>
-                    <AddToCartB product={product} className="w-full sm:w-auto text-sm" />
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
