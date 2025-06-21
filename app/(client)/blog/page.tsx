@@ -2,7 +2,7 @@ import Container from '@/components/Container';
 import Title from '@/components/Title';
 import { urlFor } from '@/sanity/lib/image';
 import { getAllBlogs } from '@/sanity/queries';
-
+import { Blog } from '@/sanity.types';
 import dayjs from 'dayjs';
 import { Calendar } from 'lucide-react';
 import Image from 'next/image';
@@ -25,7 +25,7 @@ const BlogP = async () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogs?.map((blog) => (
+          {blogs?.map((blog: Blog) => (
             <div
               key={blog?._id}
               className="rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200"
@@ -33,7 +33,7 @@ const BlogP = async () => {
               {blog?.mainImage && (
                 <Image
                   src={urlFor(blog?.mainImage).url()}
-                  alt={blog?.title}
+                  alt="BlogImage"
                   width={500}
                   height={300}
                   className="w-full h-56 object-cover hover:scale-105 transition-transform duration-300"
@@ -48,7 +48,7 @@ const BlogP = async () => {
                         key={index}
                         className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full uppercase font-semibold"
                       >
-                        {item?.title}
+                        {(item as any)?.title || 'Category'}
                       </span>
                     ))}
                   </div>

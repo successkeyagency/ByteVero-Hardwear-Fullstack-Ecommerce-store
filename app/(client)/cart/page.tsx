@@ -100,22 +100,29 @@ const CartP = () => {
         <div className="md:col-span-2 space-y-6">
           {groupedItems.map(({ product }) => (
             <div key={product._id} className="flex items-start gap-6 border rounded-lg p-4 shadow-sm">
-              <Link href={`/product/${product.slug.current}`} className="shrink-0">
-                <Image
-                  src={urlFor(product.images[0]).url()}
-                  alt="Product"
-                  width={100}
-                  height={100}
-                  className="rounded-md object-cover"
-                />
-              </Link>
+             <Link href={`/product/${product.slug?.current ?? ""}`} className="shrink-0">
+  {product.images?.[0] ? (
+    <Image
+      src={urlFor(product.images[0]).url()}
+      alt={product.name ?? "Product"}
+      width={100}
+      height={100}
+      className="rounded-md object-cover"
+    />
+  ) : (
+    <div className="w-[100px] h-[100px] bg-gray-200 rounded-md flex items-center justify-center text-sm text-gray-500">
+      No Image
+    </div>
+  )}
+</Link>
+
               <div className="flex-1 space-y-1">
                 <h3 className="font-semibold text-lg">{product.name}</h3>
                 <p className="text-sm text-muted-foreground">Variant: {product.variant}</p>
                 <p className="text-sm text-muted-foreground">Status: {product.status}</p>
                 <QuantityB product={product} />
                 <PriceFormat
-                  amount={product.price * getItemCount(product._id)}
+                  amount={(product.price ?? 0) * getItemCount(product._id)}
                   className="font-semibold mt-2"
                 />
               </div>

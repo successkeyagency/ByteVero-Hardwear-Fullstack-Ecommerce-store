@@ -1,7 +1,6 @@
-
 "use client";
-import React from 'react'
-import { MY_ORDERS_QUERYResult } from "@/sanity.types";
+import React, { useState } from "react";
+import { MY_ORDERS_QUERYResult, Order } from "@/sanity.types";
 import { TableBody, TableCell, TableRow } from "./ui/table";
 import {
   Tooltip,
@@ -11,24 +10,27 @@ import {
 } from "./ui/tooltip";
 import { format } from "date-fns";
 import { X } from "lucide-react";
-import { useState } from "react";
 import toast from "react-hot-toast";
-import PriceFormat from './PriceFormat';
-import OrderDD from './OrderDD';
+import PriceFormat from "./PriceFormat";
+import OrderDD from "./OrderDD";
 
-const OrdersC = () => {
-    const [selectedOrder, setSelectedOrder] = useState<
-    MY_ORDERS_QUERYResult[number] | null
-  >(null);
+interface OrdersCProps {
+  orders: MY_ORDERS_QUERYResult;
+}
+
+const OrdersC: React.FC<OrdersCProps> = ({ orders }) => {
+  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+
   const handleDelete = () => {
     toast.error("Delete method applied for Admin");
   };
+
   return (
-      <>
+    <>
       <TableBody>
         <TooltipProvider>
           {orders.map((order) => (
-            <Tooltip key={order?.orderNumber}>
+            <Tooltip key={order.orderNumber}>
               <TooltipTrigger asChild>
                 <TableRow
                   className="cursor-pointer hover:bg-gray-100 h-12"
@@ -38,21 +40,19 @@ const OrdersC = () => {
                     {order.orderNumber?.slice(-10) ?? "N/A"}...
                   </TableCell>
                   <TableCell className="hidden md:table-cell">
-                    {order?.orderDate &&
+                    {order.orderDate &&
                       format(new Date(order.orderDate), "dd/MM/yyyy")}
                   </TableCell>
                   <TableCell>{order.customerName}</TableCell>
-                  <TableCell className="hidden sm:table-cell">
-                    {order.email}
-                  </TableCell>
+                  <TableCell className="hidden sm:table-cell">{order.email}</TableCell>
                   <TableCell>
                     <PriceFormat
-                      amount={order?.totalPrice}
+                      amount={order.totalPrice}
                       className="text-black font-medium"
                     />
                   </TableCell>
                   <TableCell>
-                    {order?.status && (
+                    {order.status && (
                       <span
                         className={`px-2 py-1 rounded-full text-xs font-semibold ${
                           order.status === "paid"
@@ -60,18 +60,13 @@ const OrdersC = () => {
                             : "bg-yellow-100 text-yellow-800"
                         }`}
                       >
-                        {order?.status.charAt(0).toUpperCase() +
-                          order?.status.slice(1)}
+                        {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
                       </span>
                     )}
                   </TableCell>
 
                   <TableCell className="hidden sm:table-cell">
-                    {order?.invoice && (
-                      <p className="font-medium line-clamp-1">
-                        {order?.invoice ? order?.invoice?.number : "----"}
-                      </p>
-                    )}
+                    {order.invoice ? order.invoice.number : "----"}
                   </TableCell>
                   <TableCell
                     onClick={(event) => {
@@ -100,7 +95,7 @@ const OrdersC = () => {
         onClose={() => setSelectedOrder(null)}
       />
     </>
-  )
-}
+  );
+};
 
-export default OrdersC
+export default OrdersC;
