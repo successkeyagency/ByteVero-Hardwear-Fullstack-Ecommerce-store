@@ -3,7 +3,7 @@
 import { BRANDS_QUERYResult, Category, Product } from '@/sanity.types';
 import { client } from '@/sanity/lib/client';
 import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import ProductCD from './ProductCD';
 import Title from './Title';
 import { Loader2, SlidersHorizontal, ChevronDown, ChevronUp } from 'lucide-react';
@@ -31,7 +31,7 @@ const Shop = ({ categories, brands }: Props) => {
   const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
   const [showFilters, setShowFilters] = useState(false);
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     setLoading(true);
     try {
       let minPrice = 0;
@@ -63,11 +63,11 @@ const Shop = ({ categories, brands }: Props) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedCategory, selectedBrand, selectedPrice]);
 
   useEffect(() => {
     fetchProducts();
-  }, [selectedCategory, selectedBrand, selectedPrice]);
+  }, [fetchProducts]);
 
   return (
     <div className="py-6">
@@ -89,6 +89,7 @@ const Shop = ({ categories, brands }: Props) => {
             </button>
           )}
         </div>
+
         <div className="md:hidden mb-4">
           <Button
             variant="outline"

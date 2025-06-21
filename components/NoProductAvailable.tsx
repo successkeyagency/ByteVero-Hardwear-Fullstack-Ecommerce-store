@@ -1,8 +1,8 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
-import { Loader2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { Box, RefreshCw } from "lucide-react";
 
 const NoProductAvailable = ({
   selectedTab,
@@ -14,50 +14,50 @@ const NoProductAvailable = ({
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center py-10 min-h-80 space-y-4 text-center bg-gray-100 rounded-lg w-full mt-10",
+        "flex flex-col items-center justify-center py-12 px-4 min-h-72 bg-white border border-gray-200 rounded-xl shadow-sm w-full mt-10 text-center",
         className
       )}
     >
       <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.5 }}
+        className="flex items-center justify-center bg-gray-100 p-4 rounded-full mb-4"
       >
-        <h2 className="text-2xl font-bold text-gray-800">
-          No Product Available
-        </h2>
+        <Box className="w-6 h-6 text-gray-500" />
       </motion.div>
+
+      <motion.h2
+        initial={{ y: 10, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.1, duration: 0.4 }}
+        className="text-lg sm:text-xl font-semibold text-gray-800"
+      >
+        Nothing Found Here
+      </motion.h2>
 
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-        className="text-gray-600"
+        transition={{ delay: 0.2, duration: 0.4 }}
+        className="text-sm text-gray-600 mt-2 max-w-md"
       >
-        We&apos;re sorry, but there are no products matching on{" "}
-        <span className="text-base font-semibold text-darkColor">
-          {selectedTab}
-        </span>{" "}
-        criteria at the moment.
+        It seems there are currently no items available for{" "}
+        <span className="text-amber-600 font-medium">{selectedTab || "this selection"}</span>.  
+        Try adjusting your filters or check back later.
       </motion.p>
 
       <motion.div
-        animate={{ scale: [1, 1.1, 1] }}
-        transition={{ repeat: Infinity, duration: 1.5 }}
-        className="flex items-center space-x-2 text-shop_dark_green"
+        animate={{ rotate: [0, 360] }}
+        transition={{ repeat: Infinity, duration: 1.8, ease: "linear" }}
+        className="mt-6 text-gray-400"
       >
-        <Loader2 className="w-5 h-5 animate-spin" />
-        <span>We&apos;re restocking shortly</span>
+        <RefreshCw className="w-5 h-5 mx-auto" />
       </motion.div>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4, duration: 0.5 }}
-        className="text-sm text-gray-500"
-      >
-        Please check back later or explore our other product categories.
-      </motion.p>
+      <p className="mt-4 text-xs text-gray-400">
+        Inventory is updated regularly — new arrivals coming soon.
+      </p>
     </div>
   );
 };

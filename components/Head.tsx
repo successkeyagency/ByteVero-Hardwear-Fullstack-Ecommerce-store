@@ -1,6 +1,5 @@
 import React from "react";
 import Container from "./Container";
-import logo from "../assets/Bytevero.jpg";
 import Logo from "./Logo";
 import HeaderMenu from "./HeaderMenu";
 import Search from "./Search";

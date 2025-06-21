@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import Container from "@/components/Container";
 import Title from "@/components/Title";
-import { Blog, SINGLE_BLOG_QUERYResult } from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
 import {
   getBlogCategories,
@@ -15,13 +16,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 
-const SBP = async ({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) => {
+const SBP = async ({ params }: any) => {
   const { slug } = await params;
-  const blog: SINGLE_BLOG_QUERYResult = await getSingleBlog(slug);
+  const blog = await getSingleBlog(slug);
   if (!blog) return notFound();
 
   return (
@@ -30,16 +27,17 @@ const SBP = async ({
         <div className="w-full lg:w-2/3">
           {blog?.mainImage && (
             <Image
-              src={urlFor(blog?.mainImage).url()}
+              src={urlFor(blog.mainImage).url()}
               alt={blog.title || "Blog Image"}
               width={800}
               height={800}
               className="rounded-2xl shadow-lg mb-6"
             />
           )}
+
           <div className="mb-4">
             <div className="flex gap-4 items-center text-sm text-gray-600">
-              {blog?.blogcategories?.map((item, index) => (
+              {blog.blogcategories?.map((item: any, index: number) => (
                 <span
                   key={index}
                   className="bg-[#1e293b] text-white px-3 py-1 rounded-full"
@@ -49,13 +47,15 @@ const SBP = async ({
               ))}
             </div>
             <p className="text-gray-600 mt-2 flex items-center gap-2 text-sm">
-              <Pencil size={15} /> {blog?.author?.name}
+              <Pencil size={15} /> {blog.author?.name}
             </p>
             <p className="text-gray-600 flex items-center gap-2 text-sm">
               <Calendar size={15} /> {dayjs(blog.publishedAt).format("MMMM D, YYYY")}
             </p>
           </div>
-          <h2 className="text-3xl font-bold text-[#1e293b] mb-4">{blog?.title}</h2>
+
+          <h2 className="text-3xl font-bold text-[#1e293b] mb-4">{blog.title}</h2>
+
           <div className="prose max-w-none prose-img:rounded-xl prose-headings:text-[#1e293b] prose-p:text-gray-700">
             {blog.body && (
               <PortableText
@@ -68,7 +68,7 @@ const SBP = async ({
                     blockquote: ({ children }) => <blockquote>{children}</blockquote>,
                   },
                   types: {
-                    image: ({ value }) => (
+                    image: ({ value }: any) => (
                       <Image
                         alt={value.alt || ""}
                         src={urlFor(value).width(2000).url()}
@@ -109,7 +109,7 @@ const SBP = async ({
   );
 };
 
-const BlogLeft = async ({ slug }: { slug: string }) => {
+const BlogLeft = async ({ slug }: any) => {
   const categories = await getBlogCategories();
   const blogs = await getOthersBlog(slug, 5);
 
@@ -118,35 +118,36 @@ const BlogLeft = async ({ slug }: { slug: string }) => {
       <div className="mb-10">
         <Title className="text-xl font-bold mb-4 text-[#1e293b]">Blog Categories</Title>
         <div className="flex flex-wrap gap-2">
-          {categories?.map(({ blogcategories }, index) => (
+          {categories?.map((category: any, index: number) => (
             <div
               key={index}
               className="bg-[#cbd5e1] text-[#1e293b] px-3 py-1 rounded-full text-sm"
             >
-              {blogcategories[0]?.title} (1)
+              {category.title}
             </div>
           ))}
         </div>
       </div>
+
       <div>
         <Title className="text-xl font-bold mb-4 text-[#1e293b]">Latest Blogs</Title>
         <div className="space-y-4">
-          {blogs?.map((blog: Blog, index: number) => (
+          {blogs?.map((blog: any, index: number) => (
             <Link
-              href={`/blog/${blog?.slug?.current}`}
+              href={`/blog/${blog.slug?.current}`}
               key={index}
               className="flex items-center gap-4 p-2 hover:bg-gray-100 rounded-lg"
             >
-              {blog?.mainImage && (
+              {blog.mainImage && (
                 <Image
-                  src={urlFor(blog?.mainImage).url()}
+                  src={urlFor(blog.mainImage).url()}
                   alt="blogImage"
                   width={80}
                   height={80}
                   className="rounded-lg object-cover"
                 />
               )}
-              <p className="text-sm text-[#1e293b] font-medium">{blog?.title}</p>
+              <p className="text-sm text-[#1e293b] font-medium">{blog.title}</p>
             </Link>
           ))}
         </div>

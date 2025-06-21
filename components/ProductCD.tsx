@@ -3,7 +3,6 @@ import { urlFor } from "@/sanity/lib/image";
 import { FlameIcon, StarIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import WishListAdd from "./WishListAdd";
 import ViewPrice from "./ViewPrice";
 import Link from "next/link";
 import AddToCartB from "./AddToCartB";

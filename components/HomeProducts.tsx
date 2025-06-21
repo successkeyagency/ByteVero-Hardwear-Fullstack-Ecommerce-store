@@ -10,6 +10,11 @@ import NoProductAvailable from "./NoProductAvailable";
 import ProductCD from "./ProductCD";
 import { Product } from "@/sanity.types";
 
+const query = `*[_type == "product" && variant == $variant] | order(name desc) {
+  ...,
+  "categories": categories[]->title
+}`;
+
 const HomeProducts = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
@@ -26,16 +31,11 @@ const HomeProducts = () => {
     }
   };
 
-  const query = `*[_type == "product" && variant == $variant] | order(name desc) {
-    ...,
-    "categories": categories[]->title
-  }`;
-  const params = { variant: selectedTab.toLowerCase() };
-
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
+        const params = { variant: selectedTab.toLowerCase() };
         const response = await client.fetch(query, params);
         setProducts(response);
       } catch (error) {
@@ -46,17 +46,14 @@ const HomeProducts = () => {
     };
 
     fetchData();
-  }, [selectedTab]);
+  }, [selectedTab]); 
 
   return (
     <section className="w-full px-4 py-12">
-      
-
-
       <HomeCatSelector selectedTab={selectedTab} onTabSelect={setSelectedTab} />
 
       {loading ? (
-        <div className="flex flex-col items-center justify-center mt-12 text-white">
+        <div className="flex flex-col items-center justify-center mt-2 text-white">
           <Loader2 className="animate-spin h-6 w-6 text-orange-400 mb-2" />
           <p className="text-sm">Loading products...</p>
         </div>
@@ -76,7 +73,6 @@ const HomeProducts = () => {
               <ChevronRight size={20} />
             </button>
           </div>
-          
 
           <div
             ref={scrollRef}
