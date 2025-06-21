@@ -1,23 +1,25 @@
 import { cn } from '@/lib/utils';
-import { Product } from '@/sanity.types'
+import { Product } from '@/sanity.types';
 import { Heart } from 'lucide-react';
-import React from 'react'
+import React from 'react';
 
 const WishListAdd = ({
-    product,
-    className,
+  product,
+  className,
 }: {
-    product: Product;
-    className?: string;
+  product: Product;
+  className?: string;
 }) => {
   return (
-    <div className={cn()}>
-      <p>hi there</p>
-        <button className=''>
-            <Heart size={15}/>
-        </button>
+    <div className={cn("flex items-center", className)}>
+      <button
+        className="hover:text-red-500 transition"
+        aria-label={`Add ${product.name} to wishlist`}
+      >
+        <Heart size={18} />
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default WishListAdd
+export default WishListAdd;

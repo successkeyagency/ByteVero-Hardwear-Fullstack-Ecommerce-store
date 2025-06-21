@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Heart, HeartIcon } from "lucide-react";
+import { HeartIcon } from "lucide-react";
 import useStore from "@/store";  
 
 const LikedButton = () => {

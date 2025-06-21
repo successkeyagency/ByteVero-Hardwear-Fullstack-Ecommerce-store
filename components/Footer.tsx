@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import Container from './Container'
 import { Github, Linkedin } from 'lucide-react'
 import logo from '../assets/successkeyagency-logo.png'
@@ -18,7 +19,6 @@ const Footer = () => {
                 height={60}
                 className="rounded"
               />
-              
             </div>
             <p className="mt-2 text-green-500">Innovate | Maintain | Scale</p>
           </div>
@@ -26,9 +26,30 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold mb-3 text-white">Quick Links</h3>
             <ul className="space-y-2 text-white">
-              <li><a href="/" className="hover:text-white transition">Home</a></li>
-              <li><a href="/shop" className="hover:text-white transition">Shop</a></li>
-              <li><a href="/" className="hover:text-white transition">Contact</a></li>
+              <li>
+                <Link
+                  href="/"
+                  className="hover:text-amber-400 transition-colors duration-300"
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/shop"
+                  className="hover:text-amber-400 transition-colors duration-300"
+                >
+                  Shop
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/"
+                  className="hover:text-amber-400 transition-colors duration-300"
+                >
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -37,7 +58,10 @@ const Footer = () => {
             <p className="text-gray-400 mb-2">
               Want to work with us? <br />
               Contact us at{' '}
-              <a href="mailto:contact@successkeyagency.com" className="text-white underline">
+              <a
+                href="mailto:contact@successkeyagency.com"
+                className="text-white underline hover:text-amber-400 transition-colors duration-300"
+              >
                 contact@successkeyagency.com
               </a>
             </p>
@@ -47,7 +71,7 @@ const Footer = () => {
                 href="https://github.com/successkeyagency"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition"
+                className="text-gray-400 hover:text-amber-400 transition-colors duration-300 transform hover:scale-110"
               >
                 <Github size={20} />
               </a>
@@ -55,7 +79,7 @@ const Footer = () => {
                 href="https://linkedin.com/in/williamngumo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition"
+                className="text-gray-400 hover:text-amber-400 transition-colors duration-300 transform hover:scale-110"
               >
                 <Linkedin size={20} />
               </a>
@@ -85,7 +109,9 @@ const Footer = () => {
 
         <div className="mt-10 border-t border-gray-700 pt-6 text-center text-gray-500 text-xs">
           © {new Date().getFullYear()} SuccessKeyAgency LLC. All Rights Reserved. <br />
-          Made with <span className="text-green-500">❤️</span> By <span className="text-amber-600 font-medium">William Ngumo</span> at <span className="text-green-500 font-semibold">SuccessKeyAgency</span>.
+          Made with <span className="text-green-500">❤️</span> By{' '}
+          <span className="text-amber-600 font-medium">William Ngumo</span> at{' '}
+          <span className="text-green-500 font-semibold">SuccessKeyAgency</span>.
         </div>
       </Container>
     </footer>

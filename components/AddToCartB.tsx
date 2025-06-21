@@ -8,11 +8,13 @@ import useStore from "@/store";
 import toast from "react-hot-toast";
 import PriceFormat from "./PriceFormat";
 import QuantityB from "./QuantityB";
+import { Product } from '@/sanity.types';
 
 interface Props {
-  product: any;
+  product: Product;
   className?: string;
 }
+
 
 const AddToCartB = ({ product, className }: Props) => {
   const { addItem, getItemCount } = useStore();
