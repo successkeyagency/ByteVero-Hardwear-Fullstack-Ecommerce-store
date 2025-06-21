@@ -1,5 +1,4 @@
 import React from "react";
-import AfterHomeVid from "@/components/AfterHomeVid";
 import Container from "@/components/Container";
 import Guarantee from "@/components/Guarantee";
 import HomeProducts from "@/components/HomeProducts";

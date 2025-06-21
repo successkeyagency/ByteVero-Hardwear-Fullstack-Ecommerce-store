@@ -1,4 +1,3 @@
-import { Item } from '@radix-ui/react-accordion';
 import { Clock, Mail, MapPin, Phone } from 'lucide-react'
 import React from 'react'
 

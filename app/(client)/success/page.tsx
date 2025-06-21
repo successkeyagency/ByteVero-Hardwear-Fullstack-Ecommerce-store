@@ -4,7 +4,7 @@ import useStore from "@/store";
 import { useSearchParams } from "next/navigation";
 import { useEffect, Suspense } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle, Home, Package, ShoppingBag } from "lucide-react";
+import { CheckCircle, Home, Package } from "lucide-react";
 import Link from "next/link";
 
 const SuccessPageContent = () => {
@@ -39,8 +39,8 @@ const SuccessPageContent = () => {
           Payment Successful 🎉
         </h1>
         <p className="text-gray-700 text-sm mb-4">
-          Thank you for your order. A confirmation email has been sent. We'll
-          ship your items soon!
+          Thank you for your order. A confirmation email has been sent.
+          We&apos;ll ship your items soon!
         </p>
 
         <div className="mb-6">
@@ -65,7 +65,6 @@ const SuccessPageContent = () => {
             <Package className="w-4 h-4" />
             My Orders
           </Link>
-          
         </div>
       </motion.div>
     </div>
