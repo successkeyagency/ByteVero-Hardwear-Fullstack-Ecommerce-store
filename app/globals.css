@@ -1,5 +1,37 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+.loader {
+  border: 8px solid #e5e7eb; /* Light gray */
+  border-top-color: #22c55e; /* Green */
+  border-radius: 50%;
+  width: 3rem;  /* 48px */
+  height: 3rem; /* 48px */
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 8px #22c55e;
+  margin-top: 1.5rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
 
 @custom-variant dark (&:is(.dark *));
 
@@ -161,6 +193,7 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    
   }
   body {
     @apply bg-background text-foreground;
@@ -168,5 +201,28 @@
 }
 button {
   @apply hover:cursor-pointer;
+}
+
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 3s linear infinite;
 }
 
