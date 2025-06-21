@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import Container from "@/components/Container";
 import Title from "@/components/Title";
 import { urlFor } from "@/sanity/lib/image";
